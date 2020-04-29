@@ -29,7 +29,7 @@ public class GroupController {
     public void addGroup(GroupDto groupDto){
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "updateGroup")
+    @RequestMapping(method = RequestMethod.PUT, value = "updateGroup")
     public GroupDto updateGroup(GroupDto groupDto){
         return new GroupDto(1L, "afterEdit");
     }
