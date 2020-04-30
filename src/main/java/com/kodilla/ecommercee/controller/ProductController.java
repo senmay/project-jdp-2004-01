@@ -1,5 +1,6 @@
-package com.kodilla.ecommercee;
+package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.domain.ProductDto;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/v1/product")
 public class ProductController {
 
     @RequestMapping(method = RequestMethod.POST, value = "createProduct")
