@@ -22,5 +22,3 @@ public class UserController {
         return new UserDto(2L, "KeyAddedToUser", true, "123asd");
     }
 }
-
-
