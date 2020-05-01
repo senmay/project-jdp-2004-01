@@ -6,11 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/v1/group")
 public class GroupController {
@@ -29,7 +27,7 @@ public class GroupController {
     public void addGroup(GroupDto groupDto){
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "updateGroup")
+    @RequestMapping(method = RequestMethod.PUT, value = "updateGroup")
     public GroupDto updateGroup(GroupDto groupDto){
         return new GroupDto(1L, "afterEdit");
     }
