@@ -1,4 +1,4 @@
-package com.kodilla.ecommercee;
+package com.kodilla.ecommercee.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "addProduct")
-    public void addProduct(@RequestBody ProductDto productDto){
+    public void addProduct(@RequestParam Long productId){
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProduct")
