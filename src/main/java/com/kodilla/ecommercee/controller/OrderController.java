@@ -12,13 +12,13 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @RequestMapping("/v1/order")
 public class OrderController {
 
-    @RequestMapping(method = RequestMethod.GET, value = "getOrders")
+    @GetMapping(value = "getOrders")
     public List<OrderDto> getOrderList() {
         return new ArrayList<>();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "addOrder", consumes = APPLICATION_JSON_VALUE)
-    public void createOrder(@RequestParam OrderDto orderDto) {
+    public void createOrder(@RequestBody OrderDto orderDto) {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getOrder")
@@ -27,7 +27,7 @@ public class OrderController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateOrder")
-    public OrderDto updateOrder(@RequestParam OrderDto orderDto) {
+    public OrderDto updateOrder(@RequestBody OrderDto orderDto) {
         return new OrderDto();
     }
 
