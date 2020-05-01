@@ -1,7 +1,6 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.dto.GroupDto;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,9 +30,4 @@ public class GroupController {
     public GroupDto updateGroup(GroupDto groupDto){
         return new GroupDto(1L, "afterEdit");
     }
-
-
-
-
-
 }
