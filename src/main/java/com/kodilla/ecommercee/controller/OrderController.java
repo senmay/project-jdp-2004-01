@@ -12,7 +12,7 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @RequestMapping("/v1/order")
 public class OrderController {
 
-    @GetMapping(value = "getOrders")
+    @RequestMapping(method = RequestMethod.GET, value = "getOrders")
     public List<OrderDto> getOrderList() {
         return new ArrayList<>();
     }
