@@ -1,12 +1,8 @@
-package com.kodilla.ecommercee.order;
+package com.kodilla.ecommercee.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.criterion.Order;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,5 +10,4 @@ import java.util.List;
 public class OrderDto {
     private long id;
     private String name;
-    private List<OrderDto> orderList = new ArrayList<>();
 }
