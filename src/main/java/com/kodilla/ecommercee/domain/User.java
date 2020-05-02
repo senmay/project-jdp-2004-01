@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -23,4 +20,16 @@ public class User {
         private String name;
         private boolean isActive;
         private String apiKey;
+//        private Cart cart;
+//        private List<Order> orders;
+//
+//        @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//        public List<Order> getOrders(){
+//                return orders;
+//        }
+//
+//        @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//        public Cart getCart(){
+//                return cart;
+//        }
 }
