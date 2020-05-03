@@ -6,14 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "orders")
-public class Order {
+@Entity(name = "order_items")
+public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,14 +22,14 @@ public class Order {
     @Column
     private String name;
 
+    @Column
+    private int quantity;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn
+    private Order order;
+
     /*@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn
-    private User user;*/
-
-    @OneToMany(
-            targetEntity = OrderItem.class,
-            mappedBy = ("order"),
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    List<OrderItem> orderItemList;
+    private Product product;*/
 }
