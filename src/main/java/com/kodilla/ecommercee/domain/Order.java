@@ -35,5 +35,5 @@ public class Order {
             mappedBy = ("order"),
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    List<OrderItem> orderItemList = new ArrayList<>();
+    List<OrderItem> orderItemList;
 }
