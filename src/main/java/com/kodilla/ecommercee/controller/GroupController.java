@@ -13,7 +13,7 @@ import java.util.List;
 public class GroupController {
 
     @RequestMapping(method = RequestMethod.GET, value = "getGroups")
-    public List<GroupDto> getAllGroups(){
+    public List<GroupDto> getAllGroups(GroupDto groupDto){
         return new ArrayList<GroupDto>();
     }
 
