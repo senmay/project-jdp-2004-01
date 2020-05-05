@@ -33,7 +33,7 @@ public class Product {
 
 //    @OneToMany(targetEntity = Item.class, mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @JoinColumn
-//    private OrderItem orderItem;
+//    List<OrderItem> orderItemList = new ArrayList<>();
 
 //    @OneToMany(targetEntity = Item.class, mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @JoinColumn
