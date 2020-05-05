@@ -19,13 +19,14 @@ public class Cart {
     @Id
     @NotNull
     @Column(unique = true)
+    @GeneratedValue(strategy =  GenerationType.AUTO)
     private long id;
 
     @Column
     private String name;
 
     /*
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @MapsId
     @JoinColumn
     private User user;
@@ -33,9 +34,9 @@ public class Cart {
 
     @OneToMany(
             targetEntity = CartItem.class,
-            mappedBy = ("order"),
+            mappedBy = ("cart"),
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    List<CartItem> itemCartList;
+    List<CartItem> cartItemList;
 }
