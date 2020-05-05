@@ -8,7 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity
+@Entity(name = "groups")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,15 +17,14 @@ public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    @Column(name = "group_id")
     private Long id;
 
-    @Column (name ="group_name")
     private String groupName;
     /*@OneToMany(
             targetEntity = Product.class,
             mappedBy ="group",
-            fetch = FetchType.LAZY
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
     )
     private List<Product> products;*/
 }
