@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -20,6 +22,7 @@ public class Order {
     @Column(unique = true)
     private long id;
 
+    @NotNull
     @Column
     private String name;
 
@@ -32,5 +35,5 @@ public class Order {
             mappedBy = ("order"),
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    List<OrderItem> orderItemList;
+    List<OrderItem> orderItemList = new ArrayList<>();
 }
