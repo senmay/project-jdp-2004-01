@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,9 +20,11 @@ public class CartItem {
     @Column (unique = true)
     private long id;
 
+    @NotNull
     @Column
     private String name;
 
+    @NotNull
     @Column
     private int quantity;
 

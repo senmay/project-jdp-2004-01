@@ -17,11 +17,10 @@ import java.util.List;
 public class Cart {
 
     @Id
-    @NotNull
     @Column(unique = true)
-    @GeneratedValue(strategy =  GenerationType.AUTO)
     private long id;
 
+    @NotNull
     @Column
     private String name;
 
