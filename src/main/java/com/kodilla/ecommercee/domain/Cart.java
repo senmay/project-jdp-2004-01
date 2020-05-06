@@ -18,6 +18,7 @@ public class Cart {
 
     @Id
     @Column(unique = true)
+    @NotNull
     private long id;
 
     @NotNull
