@@ -33,7 +33,7 @@ public class Cart {
 
     @OneToMany(
             targetEntity = CartItem.class,
-            mappedBy = ("cart"),
+            mappedBy = "cart",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
