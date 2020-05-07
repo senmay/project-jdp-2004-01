@@ -6,30 +6,38 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "Users")
+@Entity(name = "USERS")
 public class User {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO )
         private Long id;
+
+        @NotNull
         private String name;
+
+        @NotNull
         private boolean isActive;
+
+        @NotNull
         private String apiKey;
-//        private Cart cart;
-//        private List<Order> orders;
-//
-//        @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//        public List<Order> getOrders(){
-//                return orders;
-//        }
-//
-//        @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//        public Cart getCart(){
-//                return cart;
-//        }
+
+
+        @OneToMany(targetEntity = Order.class,
+                mappedBy = "user",
+                cascade = CascadeType.ALL,
+                fetch = FetchType.LAZY)
+        List<Order> orders;
+
+
+        @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+        @JoinColumn
+        Cart cart;
 }
