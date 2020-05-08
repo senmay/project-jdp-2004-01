@@ -8,8 +8,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -29,11 +29,9 @@ public class Product {
     @NotNull
     private String description;
 
-
-
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "group_id")
-//    private Group group;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn
+    private Group group;
 
 //    @OneToMany(targetEntity = Item.class, mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @JoinColumn
@@ -42,6 +40,7 @@ public class Product {
 //    @OneToMany(targetEntity = Item.class, mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @JoinColumn
 //    List<CartItem> cartItemList;
+
 
 }
 
