@@ -18,6 +18,7 @@ public class User {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO )
+        @Column (unique = true)
         private Long id;
 
         @NotNull
