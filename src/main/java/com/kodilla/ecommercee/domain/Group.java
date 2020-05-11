@@ -11,11 +11,11 @@ import java.util.List;
 @Entity(name = "product_groups")
 @Getter
 @NoArgsConstructor
+@NotNull
 public class Group {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
     @Column(unique = true)
     private Long id;
 
@@ -28,13 +28,13 @@ public class Group {
             targetEntity = Product.class,
             mappedBy ="group",
             fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
+            cascade = CascadeType.PERSIST,
+            orphanRemoval = true
     )
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
     public Group(String groupName) {
         this.groupName = groupName;
-        products = new ArrayList<>();
     }
 
     public void setGroupName(String groupName) {

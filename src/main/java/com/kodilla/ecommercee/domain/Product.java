@@ -19,6 +19,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true)
+    @NotNull
     private Long id;
 
     @Column
@@ -29,7 +30,7 @@ public class Product {
     @NotNull
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn
     private Group group;
 
@@ -41,7 +42,24 @@ public class Product {
 //    @JoinColumn
 //    List<CartItem> cartItemList;
 
+    public Product(String name, String description) {
+        this.name = name;
+        this.description = description;
+        /*orderItemList = new ArrayList<>();
+        cartItemList = new ArrayList<>();*/
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
 }
 
 
