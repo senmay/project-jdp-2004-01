@@ -28,5 +28,5 @@ public class Group {
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL
     )
-    List<Product> products;
+    private List<Product> products;
 }
