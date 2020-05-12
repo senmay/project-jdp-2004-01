@@ -29,11 +29,11 @@ public class CartItem {
     private int quantity;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn
+    //@JoinColumn
     private Cart cart;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn
+   // @JoinColumn
     private Product product;
 
 }
