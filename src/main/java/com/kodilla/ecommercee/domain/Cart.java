@@ -25,12 +25,10 @@ public class Cart {
     @Column
     private String name;
 
-    /*
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @MapsId
     @JoinColumn
     private User user;
-    */
 
     @OneToMany(
             targetEntity = CartItem.class,
