@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -26,9 +25,9 @@ public class Order {
     @Column
     private String name;
 
-    /*@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn
-    private User user;*/
+    private User user;
 
     @OneToMany(
             targetEntity = OrderItem.class,

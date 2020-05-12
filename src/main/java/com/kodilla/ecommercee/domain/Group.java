@@ -6,25 +6,27 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
-@Entity(name = "groups")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity(name = "groups1")
 public class Group {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
+    @Column
     private Long id;
 
+    @Column
     private String groupName;
-    /*@OneToMany(
+    @OneToMany(
             targetEntity = Product.class,
-            mappedBy ="group",
+            mappedBy =("group"),
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL
     )
-    private List<Product> products;*/
+    List<Product> products;
 }
