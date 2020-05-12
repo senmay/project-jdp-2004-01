@@ -4,11 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -19,7 +20,6 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true)
-    @NotNull
     private Long id;
 
     @Column
@@ -34,13 +34,13 @@ public class Product {
     @JoinColumn
     private Group group;
 
-//    @OneToMany(targetEntity = Item.class, mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn
-//    List<OrderItem> orderItemList;
+    @OneToMany(targetEntity = OrderItem.class, mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //@JoinColumn
+    List<OrderItem> orderItemList;
 
-//    @OneToMany(targetEntity = Item.class, mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn
-//    List<CartItem> cartItemList;
+    @OneToMany(targetEntity = CartItem.class, mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //@JoinColumn
+    List<CartItem> cartItemList;
 
     public Product(String name, String description) {
         this.name = name;
