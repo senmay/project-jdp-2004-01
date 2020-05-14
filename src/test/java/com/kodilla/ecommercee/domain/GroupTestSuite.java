@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,9 +49,7 @@ public class GroupTestSuite {
         //When
         groupRepository.save(group);
         groupRepository.delete(group);
-        List<Group> result = new ArrayList<>();
-        Iterable<Group> getGroups = groupRepository.findAll();
-        getGroups.forEach(result :: add);
+        List<Group> result = groupRepository.findAll();
 
         //Then
         assertTrue(result.isEmpty());
@@ -69,9 +66,7 @@ public class GroupTestSuite {
         groupRepository.save(group1);
         groupRepository.save(group2);
         groupRepository.save(group3);
-        List<Group> result = new ArrayList<>();
-        Iterable<Group> getGroups = groupRepository.findAll();
-        getGroups.forEach(result :: add);
+        List<Group> result = groupRepository.findAll();
 
         //Then
         assertEquals(3, result.size());
@@ -94,9 +89,7 @@ public class GroupTestSuite {
         group.setGroupName("Updated_Group");
         groupRepository.save(group);
 
-        List<Group> result = new ArrayList<>();
-        Iterable<Group> getGroups = groupRepository.findAll();
-        getGroups.forEach(result::add);
+        List<Group> result = groupRepository.findAll();
         Group updatedName = result.get(0);
 
         //Then
@@ -124,9 +117,7 @@ public class GroupTestSuite {
 
         //When
         groupRepository.save(group);
-        List<Group> result = new ArrayList<>();
-        Iterable<Group> getGroups = groupRepository.findAll();
-        getGroups.forEach(result::add);
+        List<Group> result = groupRepository.findAll();
         Group loadedGroup = result.get(0);
         List<Product> productsInGroup = loadedGroup.getProducts();
 
@@ -164,13 +155,8 @@ public class GroupTestSuite {
         long id = product1.getId();
         productRepository.deleteById(id);
 
-        List<Group> result = new ArrayList<>();
-        Iterable<Group> getGroups = groupRepository.findAll();
-        getGroups.forEach(result::add);
-
-        List<Product> productsInGroup = new ArrayList<>();
-        Iterable<Product> getProducts = productRepository.findAll();
-        getProducts.forEach(productsInGroup::add);
+        List<Group> result = groupRepository.findAll();
+        List<Product> productsInGroup = productRepository.findAll();
 
         //Then
         assertEquals(1, result.size());
@@ -210,13 +196,8 @@ public class GroupTestSuite {
         long id = product1.getId();
         productRepository.deleteById(id);
 
-        List<Group> result = new ArrayList<>();
-        Iterable<Group> getGroups = groupRepository.findAll();
-        getGroups.forEach(result::add);
-
-        List<Product> productsInGroup = new ArrayList<>();
-        Iterable<Product> getProducts = productRepository.findAll();
-        getProducts.forEach(productsInGroup::add);
+        List<Group> result = groupRepository.findAll();
+        List<Product> productsInGroup = productRepository.findAll();
 
         //Then
         assertEquals(1, result.size());
