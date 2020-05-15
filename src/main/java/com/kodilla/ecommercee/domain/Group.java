@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "groups")
 @Getter
@@ -19,12 +21,20 @@ public class Group {
     @NotNull
     private Long id;
 
+    @Column
     private String groupName;
-    /*@OneToMany(
+    @OneToMany(
             targetEntity = Product.class,
             mappedBy ="group",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.PERSIST
     )
-    private List<Product> products;*/
+    private List<Product> products = new ArrayList<>();
+
+    public Group(String groupName) {
+        this.groupName = groupName;
+    }
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
 }
