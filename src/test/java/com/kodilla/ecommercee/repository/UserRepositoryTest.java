@@ -4,7 +4,6 @@ import com.kodilla.ecommercee.domain.Cart;
 import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.User;
-import org.aspectj.weaver.ast.Or;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
