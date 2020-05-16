@@ -25,13 +25,15 @@ public class Order {
     @Column
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
     @JoinColumn
     private User user;
 
     @OneToMany(
             targetEntity = OrderItem.class,
-            mappedBy = "order",
+            mappedBy = ("order"),
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     List<OrderItem> orderItemList;
