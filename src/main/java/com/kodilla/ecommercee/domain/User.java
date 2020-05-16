@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -15,8 +16,8 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO )
-    @Column (unique = true)
+    @GeneratedValue
+    @Column
     private Long id;
 
     @NotNull
@@ -33,7 +34,7 @@ public class User {
             mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    List<Order> orders;
+    private List<Order> orders = new ArrayList<>();
 
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

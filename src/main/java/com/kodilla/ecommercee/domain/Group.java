@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "groups1")
+@Entity(name = "product_groups")
 public class Group {
 
     @Id
@@ -24,9 +24,13 @@ public class Group {
     private String groupName;
     @OneToMany(
             targetEntity = Product.class,
-            mappedBy =("group"),
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
+            mappedBy ="group",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.PERSIST
     )
-    List<Product> products;
+    private List<Product> products;
+
+    public Group(String groupName) {
+        this.groupName = groupName;
+    }
 }
