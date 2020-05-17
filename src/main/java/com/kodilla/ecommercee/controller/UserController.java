@@ -2,28 +2,51 @@ package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.domain.dto.UserDto;
+import com.kodilla.ecommercee.mapper.UserMapper;
+import com.kodilla.ecommercee.service.DbUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/v1/user")
 public class UserController {
+    @Autowired
+    DbUserService dbUserService;
+    @Autowired
+    UserMapper userMapper;
 
-    @RequestMapping(method = RequestMethod.POST, value = "createUser", consumes = APPLICATION_JSON_VALUE)
+    @PostMapping(value = "createUser", consumes = APPLICATION_JSON_VALUE)
     public void createUser(@RequestBody UserDto userDto) {
+        dbUserService.saveUser(userMapper.mapToUser(userDto));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "banUser")
-    public UserDto banUser(@RequestParam Long userId) {
-        return new UserDto(1L, "BannedUser", false, null);
+    @GetMapping(value = "getUsers")
+    public List<User> getUsers() {
+        return dbUserService.getAllUsers();
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "keyGenerator" )
-    public UserDto apiKeyGenerator(@RequestBody UserDto userDto) {
-        return new UserDto(2L, "KeyAddedToUser", true, "123asd");
+    @PutMapping(value = "banUser")
+    private void banUser(@RequestParam Long userId) {
+        dbUserService.banUser(userId);
+    }
+
+    @PutMapping(value = "keyGenerator")
+    private void apiKeyGenerator(@RequestParam Long userId) {
+       dbUserService.generateApiKey(userId);
+    }
+
+    @GetMapping(value ="getUser")
+    public Optional<User> getUser(@RequestParam Long userId) {
+        return dbUserService.getUser(userId);
+    }
+
+    @DeleteMapping(value ="deleteUser")
+    public void deleteUser(@RequestParam Long userId) {
+        dbUserService.deleteUser(userId);
     }
 }
