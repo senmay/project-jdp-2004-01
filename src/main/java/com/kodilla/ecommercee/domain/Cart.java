@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -31,7 +32,7 @@ public class Cart {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn
-    User user;
+    private User user;
 
     @OneToMany(
             targetEntity = CartItem.class,
@@ -39,5 +40,5 @@ public class Cart {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    List<CartItem> cartItemList;
+    private List<CartItem> cartItemList = new ArrayList<>();
 }

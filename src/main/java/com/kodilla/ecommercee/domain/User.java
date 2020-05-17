@@ -41,4 +41,10 @@ public class User {
         @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
         @JoinColumn
         Cart cart;
+
+        public User(Long id, String name, boolean isActive, String apiKey) {
+                this.name = name;
+                this.isActive = isActive;
+                this.apiKey = apiKey;
+        }
 }
