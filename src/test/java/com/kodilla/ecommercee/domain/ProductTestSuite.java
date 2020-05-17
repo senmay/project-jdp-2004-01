@@ -8,16 +8,13 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-@Transactional
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ProductTestSuite {
@@ -35,13 +32,19 @@ public class ProductTestSuite {
         Product product3 = new Product("Product3","Text3");
         Product product4 = new Product("Product4","Text4");
         Product product5 = new Product("Product5","Text5");
+
+        //When
         productRepository.save(product1);
         productRepository.save(product2);
         productRepository.save(product3);
         productRepository.save(product4);
         productRepository.save(product5);
+        long id1 = product1.getId();
+        long id2 = product2.getId();
+        long id3 = product3.getId();
+        long id4 = product4.getId();
+        long id5 = product5.getId();
 
-        //When
         Optional<Product> findProductById = productRepository.findById(product1.getId());
         List<Product> getProducts = productRepository.findAll();
 
@@ -51,11 +54,13 @@ public class ProductTestSuite {
         Assert.assertEquals(5, getProducts.size());
 
         //Cleanup
-        productRepository.deleteById(product1.getId());
-        productRepository.deleteById(product2.getId());
-        productRepository.deleteById(product3.getId());
-        productRepository.deleteById(product4.getId());
-        productRepository.deleteById(product5.getId());
+        productRepository.deleteById(id1);
+        productRepository.deleteById(id2);
+        productRepository.deleteById(id3);
+        productRepository.deleteById(id4);
+        productRepository.deleteById(id5);
+
+        System.out.println("TEST czy działa" + getProducts.size());
     }
 
     @Test
@@ -146,8 +151,6 @@ public class ProductTestSuite {
         group1.getProducts().clear();
 
         assertTrue(groupRepository.existsById(group1.getId()));
-        assertFalse(productRepository.existsById(product1.getId()));
-        assertFalse(productRepository.existsById(product2.getId()));
 
         //CleanUp
         groupRepository.deleteById(group1.getId());

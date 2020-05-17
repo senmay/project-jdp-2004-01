@@ -32,7 +32,7 @@ public class OrderItem {
     @JoinColumn
     private Order order;
 
-    /*@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn
-    private Product product;*/
+    private Product product;
 }
