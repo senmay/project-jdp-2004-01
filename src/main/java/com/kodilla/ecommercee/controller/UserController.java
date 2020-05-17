@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.UserNotFoundException;
+import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.domain.dto.UserDto;
 import com.kodilla.ecommercee.mapper.UserMapper;
 import com.kodilla.ecommercee.service.DbUserService;
@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -25,26 +26,27 @@ public class UserController {
     }
 
     @GetMapping(value = "getUsers")
-    public List<UserDto> getUsers() {
-        return userMapper.mapToUserDtoList(dbUserService.getAllUsers());
+    public List<User> getUsers() {
+        return dbUserService.getAllUsers();
     }
 
-    @GetMapping(value = "getUser")
-    public UserDto getUser(@RequestParam Long userId) throws UserNotFoundException {
-        return userMapper.mapToUserDto(dbUserService.getUser(userId).orElseThrow(UserNotFoundException::new));
-    }
     @PutMapping(value = "banUser")
-    private void banUser(@RequestParam Long userId) throws UserNotFoundException {
+    private void banUser(@RequestParam Long userId) {
         dbUserService.banUser(userId);
     }
 
     @PutMapping(value = "keyGenerator")
-    private String apiKeyGenerator(@RequestParam Long userId) throws UserNotFoundException {
-       return dbUserService.generateApiKey(userId);
+    private void apiKeyGenerator(@RequestParam Long userId) {
+       dbUserService.generateApiKey(userId);
+    }
+
+    @GetMapping(value ="getUser")
+    public Optional<User> getUser(@RequestParam Long userId) {
+        return dbUserService.getUser(userId);
     }
 
     @DeleteMapping(value ="deleteUser")
-    public void deleteUser(@RequestParam Long userId) throws UserNotFoundException {
+    public void deleteUser(@RequestParam Long userId) {
         dbUserService.deleteUser(userId);
     }
 }
