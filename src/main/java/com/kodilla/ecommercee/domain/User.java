@@ -21,12 +21,15 @@ public class User {
     private Long id;
 
     @NotNull
+    @Column
     private String name;
 
     @NotNull
+    @Column
     private boolean isActive;
 
     @NotNull
+    @Column
     private String apiKey;
 
 
