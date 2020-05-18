@@ -1,33 +1,42 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.dto.GroupDto;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.kodilla.ecommercee.mapper.GroupMapper;
+import com.kodilla.ecommercee.service.DbGroupService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/v1/group")
 public class GroupController {
 
-    @RequestMapping(method = RequestMethod.GET, value = "getGroups")
+    @Autowired
+    private DbGroupService groupService;
+
+    @Autowired
+    private GroupMapper groupMapper;
+
+    @GetMapping(value = "getGroups")
     public List<GroupDto> getAllGroups(){
-        return new ArrayList<GroupDto>();
+        return groupMapper.mapToGroupDtoList(groupService.getAllGroups());
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getGroup")
-    public GroupDto getGroup(Long id){
-        return new GroupDto(1L, "test");
+    @GetMapping(value = "getGroup")
+    public GroupDto getGroup(@RequestParam Long id) throws GroupNotFoundException{
+        return groupMapper.mapToGroupDto(groupService.getGroup(id).orElseThrow(GroupNotFoundException::new));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "addGroup")
-    public void addGroup(GroupDto groupDto){
-    }
+    @PostMapping(value = "addGroup", consumes = APPLICATION_JSON_VALUE)
+    public void addGroup(@RequestBody GroupDto groupDto) {
+        groupService.saveGroup(groupMapper.mapToGroup(groupDto));
+        }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "updateGroup")
-    public GroupDto updateGroup(GroupDto groupDto){
-        return new GroupDto(1L, "afterEdit");
+    @PutMapping(value = "updateGroup", consumes = APPLICATION_JSON_VALUE)
+    public GroupDto updateGroup(@RequestBody GroupDto groupDto){
+        return groupMapper.mapToGroupDto(groupService.saveGroup(groupMapper.mapToGroup(groupDto)));
     }
 }

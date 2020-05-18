@@ -26,7 +26,7 @@ public class GroupTestSuite {
     @Test
     public void testShouldAddOneGroup() {
         //Given
-        Group group = new Group("Test_Group_OneOnly");
+        Group group = new Group(null, "Test_Group_OneOnly");
 
         //When
         groupRepository.save(group);
@@ -44,7 +44,7 @@ public class GroupTestSuite {
     @Test
     public void testShouldRemoveGroup() {
         //Given
-        Group group = new Group("Test_Group_Remove");
+        Group group = new Group(null, "Test_Group_Remove");
 
         //When
         groupRepository.save(group);
@@ -58,9 +58,9 @@ public class GroupTestSuite {
     @Test
     public void testShouldFindCoupleGroups() {
         //Given
-        Group group1 = new Group("Test_Group1");
-        Group group2 = new Group("Test_Group2");
-        Group group3 = new Group("Test_Group3");
+        Group group1 = new Group(null, "Test_Group1");
+        Group group2 = new Group(null, "Test_Group2");
+        Group group3 = new Group(null, "Test_Group3");
 
         //When
         groupRepository.save(group1);
@@ -81,7 +81,7 @@ public class GroupTestSuite {
     @Test
     public void testShouldUpdateName() {
         //Given
-        Group group = new Group("Test_Group_ToUpdate");
+        Group group = new Group(null, "Test_Group_ToUpdate");
 
         //When
         groupRepository.save(group);
@@ -103,10 +103,10 @@ public class GroupTestSuite {
     @Test
     public void testShouldSaveGroupWithProducts() {
         //Given
-        Product product1 = new Product("prod1", "desc1");
-        Product product2 = new Product("prod2", "desc2");
-        Product product3 = new Product("prod3", "desc3");
-        Group group = new Group("Test_Group_with_Products");
+        Product product1 = new Product(null, "prod1", "desc1");
+        Product product2 = new Product(null, "prod2", "desc2");
+        Product product3 = new Product(null, "prod3", "desc3");
+        Group group = new Group(null, "Test_Group_with_Products");
 
         group.getProducts().add(product1);
         group.getProducts().add(product2);
@@ -138,10 +138,10 @@ public class GroupTestSuite {
     @Test
     public void testShouldNotRemoveProductWithGroupRelation() {
         //Given
-        Product product1 = new Product("prod1", "desc1");
-        Product product2 = new Product("prod2", "desc2");
-        Product product3 = new Product("prod3", "desc3");
-        Group group = new Group("Test_Group_with_Products_Nothing_Change");
+        Product product1 = new Product(null, "prod1", "desc1");
+        Product product2 = new Product(null, "prod2", "desc2");
+        Product product3 = new Product(null, "prod3", "desc3");
+        Group group = new Group(null, "Test_Group_with_Products_Nothing_Change");
 
         group.getProducts().add(product1);
         group.getProducts().add(product2);
@@ -176,10 +176,10 @@ public class GroupTestSuite {
     @Test
     public void testShouldRemoveOneProduct() {
         //Given
-        Product productToRemove = new Product("To_remove", "To_Remove_desc");
-        Product product1 = new Product("prod1", "desc1");
-        Product product2 = new Product("prod2", "desc2");
-        Group group = new Group("Test_Group_with_Product_Deleted");
+        Product productToRemove = new Product(null, "To_remove", "To_Remove_desc");
+        Product product1 = new Product(null, "prod1", "desc1");
+        Product product2 = new Product(null, "prod2", "desc2");
+        Group group = new Group(null, "Test_Group_with_Product_Deleted");
 
         group.getProducts().add(product1);
         group.getProducts().add(product2);
