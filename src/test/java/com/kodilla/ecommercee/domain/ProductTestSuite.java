@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class ProductTestSuite {
 
     @Autowired
@@ -146,9 +148,11 @@ public class ProductTestSuite {
         groupRepository.save(group1);
 
         //Then
-        productRepository.delete(product1);
-        productRepository.delete(product2);
+        product1.setGroup(null);
+        product2.setGroup(null);
         group1.getProducts().clear();
+        productRepository.deleteById(product1.getId());
+        productRepository.deleteById(product2.getId());
 
         assertTrue(groupRepository.existsById(group1.getId()));
 
