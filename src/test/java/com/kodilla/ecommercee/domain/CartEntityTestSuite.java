@@ -32,7 +32,6 @@ public class CartEntityTestSuite {
         Optional<Cart> cart = cartRepository.findById(id);
 
         //Then
-        Assert.assertEquals(1, id);
         Assert.assertTrue(cart.isPresent());
 
         //CleanUp
