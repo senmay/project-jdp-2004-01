@@ -17,20 +17,17 @@ import java.util.List;
 public class Cart {
 
     @Id
-    @Column(unique = true)
-    @NotNull
+    @GeneratedValue
+    @Column
     private long id;
 
     @NotNull
     @Column
     private String name;
 
-    /*
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @MapsId
     @JoinColumn
     private User user;
-    */
 
     @OneToMany(
             targetEntity = CartItem.class,
@@ -39,4 +36,8 @@ public class Cart {
             fetch = FetchType.LAZY
     )
     List<CartItem> cartItemList;
+
+    public Cart(@NotNull String name) {
+        this.name = name;
+    }
 }

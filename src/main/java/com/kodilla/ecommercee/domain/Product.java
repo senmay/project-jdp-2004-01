@@ -19,7 +19,6 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true)
-    @NotNull
     private Long id;
 
     @Column
