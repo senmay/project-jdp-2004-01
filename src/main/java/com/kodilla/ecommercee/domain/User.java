@@ -20,11 +20,11 @@ public class User {
     @Id
     @GeneratedValue
     @Column
-    private Long id;
+    private Long userId;
 
     @NotNull
     @Column
-    private String name;
+    private String username;
 
     @NotNull
     @Column
@@ -47,7 +47,7 @@ public class User {
     Cart cart;
 
     public User(Long id, String name, boolean isActive, String apiKey) {
-        this.name = name;
+        this.username = name;
         this.isActive = isActive;
         this.apiKey = apiKey;
     }
