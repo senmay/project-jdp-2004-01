@@ -27,10 +27,12 @@ public class GroupTestSuite {
     public void testShouldAddOneGroup() {
         //Given
         Group group = new Group("Test_Group_OneOnly");
+
         //When
         groupRepository.save(group);
         long id = group.getId();
         Optional<Group> getGroup = groupRepository.findById(id);
+
         //Then
         assertTrue(getGroup.isPresent());
         assertTrue(groupRepository.existsById(id));
@@ -43,10 +45,12 @@ public class GroupTestSuite {
     public void testShouldRemoveGroup() {
         //Given
         Group group = new Group("Test_Group_Remove");
+
         //When
         groupRepository.save(group);
         groupRepository.delete(group);
         List<Group> result = groupRepository.findAll();
+
         //Then
         assertTrue(result.isEmpty());
     }
@@ -57,11 +61,13 @@ public class GroupTestSuite {
         Group group1 = new Group("Test_Group1");
         Group group2 = new Group("Test_Group2");
         Group group3 = new Group("Test_Group3");
+
         //When
         groupRepository.save(group1);
         groupRepository.save(group2);
         groupRepository.save(group3);
         List<Group> result = groupRepository.findAll();
+
         //Then
         assertEquals(3, result.size());
 
@@ -76,6 +82,7 @@ public class GroupTestSuite {
     public void testShouldUpdateName() {
         //Given
         Group group = new Group("Test_Group_ToUpdate");
+
         //When
         groupRepository.save(group);
         long id = group.getId();
@@ -84,6 +91,7 @@ public class GroupTestSuite {
 
         List<Group> result = groupRepository.findAll();
         Group updatedName = result.get(0);
+
         //Then
         assertEquals(id, updatedName.getId(), 0);
         assertEquals("Updated_Group", updatedName.getGroupName());
@@ -106,11 +114,13 @@ public class GroupTestSuite {
         product1.setGroup(group);
         product2.setGroup(group);
         product3.setGroup(group);
+
         //When
         groupRepository.save(group);
         List<Group> result = groupRepository.findAll();
         Group loadedGroup = result.get(0);
         List<Product> productsInGroup = loadedGroup.getProducts();
+
         //Then
         assertEquals(3, productsInGroup.size());
 
@@ -139,6 +149,7 @@ public class GroupTestSuite {
         product1.setGroup(group);
         product2.setGroup(group);
         product3.setGroup(group);
+
         //When
         groupRepository.save(group);
         long id = product1.getId();
@@ -146,6 +157,7 @@ public class GroupTestSuite {
 
         List<Group> result = groupRepository.findAll();
         List<Product> productsInGroup = productRepository.findAll();
+
         //Then
         assertEquals(1, result.size());
         assertEquals(3, productsInGroup.size());
@@ -175,6 +187,7 @@ public class GroupTestSuite {
         product1.setGroup(group);
         product2.setGroup(group);
         productToRemove.setGroup(group);
+
         //When
         groupRepository.save(group);
         productToRemove.setGroup(null);
@@ -185,6 +198,7 @@ public class GroupTestSuite {
 
         List<Group> result = groupRepository.findAll();
         List<Product> productsInGroup = productRepository.findAll();
+
         //Then
         assertEquals(1, result.size());
         assertEquals(2, productsInGroup.size());
