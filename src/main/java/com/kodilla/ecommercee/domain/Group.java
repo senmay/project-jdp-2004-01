@@ -11,7 +11,6 @@ import java.util.List;
 
 @Entity(name = "product_groups")
 @Getter
-@Setter
 @NoArgsConstructor
 public class Group {
 
@@ -23,18 +22,23 @@ public class Group {
     @Column
     private String groupName;
 
-
     @OneToMany(
             targetEntity = Product.class,
             mappedBy ="group",
             fetch = FetchType.EAGER,
             cascade = CascadeType.PERSIST
     )
-    private List<Product> products = new ArrayList<>();
+    private List<Product> products;
+
+    public Group(String groupName) {
+        this.groupName = groupName;
+        this.products = new ArrayList<>();
+    }
 
     public Group(Long id, String groupName) {
         this.id = id;
         this.groupName = groupName;
+        this.products = new ArrayList<>();
     }
 
     public void setGroupName(String groupName) {

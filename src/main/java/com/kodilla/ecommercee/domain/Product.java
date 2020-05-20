@@ -53,6 +53,12 @@ public class Product {
         orderItemList = new ArrayList<>();
         cartItemList = new ArrayList<>();
     }
+    public Product( String name, String description) {
+        this.name = name;
+        this.description = description;
+        orderItemList = new ArrayList<>();
+        cartItemList = new ArrayList<>();
+    }
 
     public void setName(String name) {
         this.name = name;
