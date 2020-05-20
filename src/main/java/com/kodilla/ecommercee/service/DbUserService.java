@@ -1,9 +1,11 @@
 package com.kodilla.ecommercee.service;
 
 import com.kodilla.ecommercee.domain.User;
+import com.kodilla.ecommercee.domain.UserNotFoundException;
 import com.kodilla.ecommercee.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
 import java.util.Arrays;
@@ -23,9 +25,11 @@ public class DbUserService {
         return userRepository.findById(id);
     }
 
-    public void deleteUser(final Long id) {
+    public void deleteUser(final Long id) throws UserNotFoundException {
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
+        } else {
+            throw new UserNotFoundException();
         }
     }
 
@@ -33,23 +37,26 @@ public class DbUserService {
         userRepository.save(user);
     }
 
-    public void banUser(final Long id) {
+    @Transactional
+    public void banUser(final Long id) throws UserNotFoundException {
         if (userRepository.findById(id).isPresent()) {
             User userToBan = userRepository.findById(id).get();
-            if (userToBan.isActive()) {
-                userToBan.setActive(false);
-            } else {
-                userToBan.setActive(false);
-            }
+            userToBan.setActive(true);
             userRepository.save(userToBan);
+        } else {
+            throw new UserNotFoundException();
         }
     }
 
-    public void generateApiKey(final Long id){
+    public String generateApiKey (final Long id) throws UserNotFoundException{
         if (userRepository.findById(id).isPresent()) {
             User userById = userRepository.findById(id).get();
-            userById.setApiKey(tokenGeneration());
+            String token = tokenGeneration();
+            userById.setApiKey(token);
             userRepository.save(userById);
+            return token;
+        } else {
+            throw new UserNotFoundException();
         }
     }
 
