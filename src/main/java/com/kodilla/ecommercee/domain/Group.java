@@ -15,14 +15,11 @@ public class Group {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(unique = true)
-    @NotNull
     private Long id;
 
     @NotNull
     @Column
     private String groupName;
-
 
     @OneToMany(
             targetEntity = Product.class,
@@ -30,10 +27,17 @@ public class Group {
             fetch = FetchType.EAGER,
             cascade = CascadeType.PERSIST
     )
-    private List<Product> products = new ArrayList<>();
+    private List<Product> products;
 
     public Group(String groupName) {
         this.groupName = groupName;
+        this.products = new ArrayList<>();
+    }
+
+    public Group(Long id, String groupName) {
+        this.id = id;
+        this.groupName = groupName;
+        this.products = new ArrayList<>();
     }
 
     public void setGroupName(String groupName) {
