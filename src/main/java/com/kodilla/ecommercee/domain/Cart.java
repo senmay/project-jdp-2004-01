@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -39,5 +40,11 @@ public class Cart {
 
     public Cart(@NotNull String name) {
         this.name = name;
+    }
+
+    public Cart(long id, User user, List<CartItem> cartItemList) {
+        this.id = id;
+        this.user = user;
+        this.cartItemList = cartItemList;
     }
 }
