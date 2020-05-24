@@ -49,9 +49,9 @@ public class OrderTestSuite {
     public void testDeleteOrder() {
         //Given
         Order order = new Order("order1");
-        orderRepository.save(order);
 
         //When
+        orderRepository.save(order);
         long id = order.getId();
         orderRepository.deleteById(id);
         List<Order> orderList = orderRepository.findAll();
@@ -90,9 +90,9 @@ public class OrderTestSuite {
         order.getOrderItemList().add(orderItem);
         orderItem.setProduct(product);
         product.getOrderItemList().add(orderItem);
-        orderRepository.save(order);
 
         //When
+        orderRepository.save(order);
         long orderId = order.getId();
         long productId = product.getId();
         long orderItemId = orderItem.getId();
