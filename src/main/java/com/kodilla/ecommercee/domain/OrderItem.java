@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,4 +35,9 @@ public class OrderItem {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn
     private Product product;
+
+    public OrderItem(@NotNull String name, @NotNull int quantity) {
+        this.name = name;
+        this.quantity = quantity;
+    }
 }

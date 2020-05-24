@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -18,7 +19,7 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
+    @Column(unique = true)
     private long id;
 
     @NotNull
@@ -32,9 +33,9 @@ public class Order {
     @OneToMany(
             targetEntity = OrderItem.class,
             mappedBy = "order",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.PERSIST,
             fetch = FetchType.LAZY)
-    List<OrderItem> orderItemList;
+    List<OrderItem> orderItemList = new ArrayList<>();
 
     public Order(@NotNull String name) {
         this.name = name;
