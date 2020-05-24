@@ -28,7 +28,7 @@ public class OrderItem {
     @Column
     private int quantity;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn
     private Order order;
 

@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.User;
+import com.kodilla.ecommercee.domain.UserNotFoundException;
 import com.kodilla.ecommercee.domain.dto.UserDto;
 import com.kodilla.ecommercee.mapper.UserMapper;
 import com.kodilla.ecommercee.service.DbUserService;
@@ -31,12 +32,12 @@ public class UserController {
     }
 
     @PutMapping(value = "banUser")
-    private void banUser(@RequestParam Long userId) {
+    private void banUser(@RequestParam Long userId) throws UserNotFoundException {
         dbUserService.banUser(userId);
     }
 
     @PutMapping(value = "keyGenerator")
-    private void apiKeyGenerator(@RequestParam Long userId) {
+    private void apiKeyGenerator(@RequestParam Long userId) throws UserNotFoundException {
        dbUserService.generateApiKey(userId);
     }
 
@@ -46,7 +47,7 @@ public class UserController {
     }
 
     @DeleteMapping(value ="deleteUser")
-    public void deleteUser(@RequestParam Long userId) {
+    public void deleteUser(@RequestParam Long userId) throws UserNotFoundException {
         dbUserService.deleteUser(userId);
     }
 }

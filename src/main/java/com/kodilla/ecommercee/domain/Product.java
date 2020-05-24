@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -34,20 +35,14 @@ public class Product {
     @JoinColumn
     private Group group;
 
-//    @OneToMany(targetEntity = Item.class, mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn
-//    List<OrderItem> orderItemList;
+    @OneToMany(targetEntity = OrderItem.class, mappedBy = "product", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @JoinColumn
+    List<OrderItem> orderItemList = new ArrayList<>();
 
-//    @OneToMany(targetEntity = Item.class, mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn
-//    List<CartItem> cartItemList;
+    @OneToMany(targetEntity = CartItem.class, mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn
+    List<CartItem> cartItemList;
 
-    public Product(String name, String description) {
-        this.name = name;
-        this.description = description;
-        /*orderItemList = new ArrayList<>();
-        cartItemList = new ArrayList<>();*/
-    }
     public Product( String name, String description) {
         this.name = name;
         this.description = description;
