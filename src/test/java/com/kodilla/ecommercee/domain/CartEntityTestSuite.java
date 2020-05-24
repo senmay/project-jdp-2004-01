@@ -1,6 +1,9 @@
 package com.kodilla.ecommercee.domain;
 
+import com.kodilla.ecommercee.repository.CartItemRepository;
 import com.kodilla.ecommercee.repository.CartRepository;
+import com.kodilla.ecommercee.repository.ProductRepository;
+import com.kodilla.ecommercee.repository.UserRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,17 +12,25 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
-import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class CartEntityTestSuite {
     @Autowired
     private CartRepository cartRepository;
+
+    @Autowired
+    private CartItemRepository cartItemRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    ProductRepository productRepository;
 
     @Test
     public void testCartCreateAndSave() {
@@ -40,7 +51,7 @@ public class CartEntityTestSuite {
 
 
     @Test
-    public void testCartDeleteCart() {
+    public void testDeleteCart() {
         //Given
         Cart cart1 = new Cart("cartname");
 
@@ -50,6 +61,7 @@ public class CartEntityTestSuite {
 
         cartRepository.deleteById(id);
         List<Cart> cart = cartRepository.findAll();
+
         //Then
         Assert.assertEquals(0, cart.size());
     }
@@ -61,11 +73,11 @@ public class CartEntityTestSuite {
         Cart cart = new Cart("cartname");
         List<CartItem> cartItems = new ArrayList<>();
         cartItems.add(new CartItem());
+        cart.setCartItemList(cartItems);
 
         //When
         cartRepository.save(cart);
         long id = cart.getId();
-        cart.setCartItemList(cartItems);
 
         List<CartItem> cartItemList = cart.getCartItemList();
         cartItemList.size();
@@ -78,24 +90,28 @@ public class CartEntityTestSuite {
     }
 
     @Test
-    public void testDeleteCartItemToCart() {
+    public void testDeleteCartItemFromCart() {
         //Given
         Cart cart = new Cart("cartname");
-        List<CartItem> cartItems = new ArrayList<>();
-        CartItem item = new CartItem();
-        cartItems.add(item);
+        Product product = new Product("prod", "desc");
+        CartItem item = new CartItem(1L,"CartName",4);
+        List<CartItem> items = new ArrayList<>();
+        item.setCart(cart);
+        items.add(item);
+        item.setProduct(product);
+        product.getCartItemList().add(item);
 
         //When
         cartRepository.save(cart);
-        long id = cart.getId();
-        cart.setCartItemList(cartItems);
+        cartItemRepository.save(item);
 
-        List<CartItem> cartItemList = cart.getCartItemList();
-        cartItemList.size();
-        cartItemList.remove(item);
+        long id = cart.getId();
+        List<CartItem> all = cartItemRepository.findAll();
+        cartItemRepository.deleteById(all.get(0).getId());
 
         //Then
-        Assert.assertEquals(0, cart.getCartItemList().size());
+        Assert.assertEquals(0, cartItemRepository.findAll().size());
+        Assert.assertTrue(cartRepository.findAll().size()==1);
 
         //CleanUp
         cartRepository.deleteById(id);
@@ -107,16 +123,39 @@ public class CartEntityTestSuite {
         //Given
         Cart cart = new Cart("cartname");
         User user = new User(111L,"userName",true,"apikey");
+        cart.setUser(user);
 
         //When
         cartRepository.save(cart);
+        userRepository.save(user);
         long id = cart.getId();
-        cart.setUser(user);
 
         //Then
         Assert.assertEquals("userName", cart.getUser().getName());
 
         //CleanUp
         cartRepository.deleteById(id);
+    }
+
+    @Test
+    public void testDelateUserFromCart() {
+        //Given
+        Cart cart = new Cart("cartname");
+        User user = new User(111L,"userName",true,"apikey");
+        List<User> users = new ArrayList<>();
+        users.add(user);
+        cart.setUser(user);
+        user.setCart(cart);
+
+        //When
+        cartRepository.save(cart);
+        userRepository.save(user);
+        long id = cart.getId();
+        userRepository.deleteById(users.get(0).getId());
+
+        //Then
+        Assert.assertEquals(0, userRepository.findAll().size());
+        Assert.assertEquals(0, cartRepository.findAll().size());
+
     }
 }

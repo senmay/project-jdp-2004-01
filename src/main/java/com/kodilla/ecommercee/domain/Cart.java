@@ -16,14 +16,9 @@ import java.util.List;
 @Setter
 @Entity(name = "carts")
 public class Cart {
-
-    public Cart(String name) {
-        this.name=name;
-    }
-
     @Id
-    @Column(unique = true)
     @GeneratedValue
+    @Column
     private long id;
 
     @NotNull
@@ -31,14 +26,18 @@ public class Cart {
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn
+   // @JoinColumn
     private User user;
 
     @OneToMany(
             targetEntity = CartItem.class,
             mappedBy = "cart",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER
     )
-    private List<CartItem> cartItemList = new ArrayList<>();
+    List<CartItem> cartItemList=new ArrayList<>();
+
+    public Cart(@NotNull String name) {
+        this.name = name;
+    }
 }

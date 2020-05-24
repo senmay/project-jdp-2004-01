@@ -17,7 +17,7 @@ public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column (unique = true)
+    @Column(unique = true)
     private long id;
 
     @NotNull
@@ -28,13 +28,19 @@ public class CartItem {
     @Column
     private int quantity;
 
+    public CartItem(Long id, String name, int quantity) {
+        this.id = id;
+        this.name = name;
+        this.quantity = quantity;
+    }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  //  @JoinColumn
-    Cart cart=new Cart();
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    //  @JoinColumn
+            Cart cart = new Cart();
 
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  //  @JoinColumn
-    Product product=new Product();
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn
+    private Product product;
+
 }
