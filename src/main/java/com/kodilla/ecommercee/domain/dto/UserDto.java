@@ -13,8 +13,9 @@ public class UserDto {
 
     private Long userId;
     private String username;
-    private String apiKey;
     @JsonProperty
     private boolean isActive;
+    private String apiKey;
+
 
 }
