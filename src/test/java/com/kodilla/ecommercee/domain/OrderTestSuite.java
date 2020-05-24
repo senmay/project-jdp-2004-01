@@ -41,6 +41,7 @@ public class OrderTestSuite {
 
         //Then
         Assert.assertTrue(readOrder.isPresent());
+
         //Clean up
         orderRepository.deleteById(id);
     }
