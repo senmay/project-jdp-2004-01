@@ -39,8 +39,9 @@ public class DbUserService {
 
     @Transactional
     public void banUser(final Long id) throws UserNotFoundException {
-        if (userRepository.findById(id).isPresent()) {
-            User userToBan = userRepository.findById(id).get();
+        Optional<User> userFoundById = userRepository.findById(id);
+        if (userFoundById.isPresent()) {
+            User userToBan = userFoundById.get();
             userToBan.setActive(true);
             userRepository.save(userToBan);
         } else {
@@ -49,8 +50,9 @@ public class DbUserService {
     }
 
     public String generateApiKey (final Long id) throws UserNotFoundException{
-        if (userRepository.findById(id).isPresent()) {
-            User userById = userRepository.findById(id).get();
+        Optional<User> userFoundById = userRepository.findById(id);
+        if (userFoundById.isPresent()) {
+            User userById = userFoundById.get();
             String token = tokenGeneration();
             userById.setApiKey(token);
             userRepository.save(userById);
