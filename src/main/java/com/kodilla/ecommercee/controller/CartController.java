@@ -38,12 +38,12 @@ public class CartController {
     }
 
     @PutMapping(value = "addProduct", consumes = APPLICATION_JSON_VALUE)
-    public void addProduct(@RequestParam Long id, @RequestParam Long cartId) throws CartNotFoundException{
+    public void addProduct(@RequestParam Long id, @RequestParam Long cartId) throws CartNotFoundException, ProductNotFoundException{
         cartService.addProduct(id, cartId);
     }
 
     @DeleteMapping(value = "deleteProduct", consumes = APPLICATION_JSON_VALUE)
-    public void deleteProduct(@RequestParam Long cartItemId,@RequestParam Long cartId){
+    public void deleteProduct(@RequestParam Long cartItemId,@RequestParam Long cartId) throws CartNotFoundException, ProductNotFoundException{
         cartService.deleteProduct(cartItemId,cartId);
     }
 
