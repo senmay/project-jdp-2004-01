@@ -20,8 +20,12 @@ public class DbProductService {
         return productRepository.findAll();
     }
 
-    public Product getById (final Long id) {
-        return productRepository.findById(id).get();
+    public Product getById (final Long id) throws ProductNotFoundException {
+        if (productRepository.findById(id).isPresent()) {
+            return productRepository.findById(id).get();
+        } else {
+            throw new ProductNotFoundException(INFORMATION);
+        }
     }
 
     public void saveProduct(Product product) {
