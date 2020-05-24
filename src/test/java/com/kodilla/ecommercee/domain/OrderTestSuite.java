@@ -100,10 +100,6 @@ public class OrderTestSuite {
         Optional<Product> products = productRepository.findById(productId);
         Optional<OrderItem> orderItems = orderItemRepository.findById(orderItemId);
 
-        System.out.println();
-        System.out.println(products);
-        System.out.println(orderItems);
-
         //Then
         Assert.assertEquals(1, products.get().getOrderItemList().size());
         Assert.assertTrue(orderItems.isPresent());
