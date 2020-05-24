@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -16,29 +17,39 @@ import java.util.List;
 @Entity(name = "USERS")
 public class User {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO )
-        @Column (unique = true)
-        private Long id;
+    @Id
+    @GeneratedValue
+    @Column
+    private Long userId;
 
-        @NotNull
-        private String name;
+    @NotNull
+    @Column
+    private String username;
 
-        @NotNull
-        private boolean isActive;
+    @NotNull
+    @Column
+    private boolean isActive;
 
-        @NotNull
-        private String apiKey;
-
-
-        @OneToMany(targetEntity = Order.class,
-                mappedBy = "user",
-                cascade = CascadeType.ALL,
-                fetch = FetchType.LAZY)
-        List<Order> orders;
+    @NotNull
+    @Column
+    private String apiKey;
 
 
-        @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-        @JoinColumn
-        Cart cart;
+    @OneToMany(targetEntity = Order.class,
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private List<Order> orders = new ArrayList<>();
+
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn
+    Cart cart;
+
+    public User(Long id, String name, boolean isActive, String apiKey) {
+        this.username = name;
+        this.isActive = isActive;
+        this.apiKey = apiKey;
+    }
+
 }

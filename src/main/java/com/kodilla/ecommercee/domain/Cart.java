@@ -21,8 +21,8 @@ public class Cart {
     }
 
     @Id
-    @Column(unique = true)
     @GeneratedValue
+    @Column
     private long id;
 
     @NotNull
@@ -31,7 +31,7 @@ public class Cart {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn
-    User user;
+    private User user;
 
     @OneToMany(
             targetEntity = CartItem.class,
@@ -40,4 +40,8 @@ public class Cart {
             fetch = FetchType.LAZY
     )
     List<CartItem> cartItemList;
+
+    public Cart(@NotNull String name) {
+        this.name = name;
+    }
 }
