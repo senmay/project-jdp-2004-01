@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class DbProductService {
@@ -21,8 +22,9 @@ public class DbProductService {
     }
 
     public Product getById (final Long id) throws ProductNotFoundException {
-        if (productRepository.findById(id).isPresent()) {
-            return productRepository.findById(id).get();
+        Optional<Product> checkProductId = productRepository.findById(id);
+        if (checkProductId.isPresent()) {
+            return checkProductId.get();
         } else {
             throw new ProductNotFoundException(INFORMATION);
         }
