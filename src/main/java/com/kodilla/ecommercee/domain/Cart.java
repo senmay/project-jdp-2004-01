@@ -16,10 +16,6 @@ import java.util.List;
 @Entity(name = "carts")
 public class Cart {
 
-    public Cart(String name) {
-        this.name=name;
-    }
-
     @Id
     @GeneratedValue
     @Column

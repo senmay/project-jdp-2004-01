@@ -34,7 +34,7 @@ public class Order {
             mappedBy = "order",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    List<OrderItem> orderItemList;
+    private List<OrderItem> orderItemList;
 
     public Order(@NotNull String name) {
         this.name = name;
