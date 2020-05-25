@@ -23,8 +23,8 @@ public class DbOrderService {
         return orderRepository.findById(id);
     }
 
-    public Order save(Order task) {
-        return orderRepository.save(task);
+    public Order save(Order order) {
+        return orderRepository.save(order);
     }
 
 
