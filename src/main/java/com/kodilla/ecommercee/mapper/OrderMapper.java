@@ -28,6 +28,4 @@ public class OrderMapper {
                 .map(t->new OrderDto(t.getId(),t.getName()))
                 .collect(Collectors.toList());
     }
-
-
 }

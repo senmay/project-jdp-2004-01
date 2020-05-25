@@ -39,4 +39,9 @@ public class Order {
     public Order(@NotNull String name) {
         this.name = name;
     }
+
+    public Order(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
