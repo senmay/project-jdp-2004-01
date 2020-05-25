@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "USERS")
 public class User {
@@ -18,11 +20,11 @@ public class User {
     @Id
     @GeneratedValue
     @Column
-    private Long id;
+    private Long userId;
 
     @NotNull
     @Column
-    private String name;
+    private String username;
 
     @NotNull
     @Column
@@ -45,7 +47,7 @@ public class User {
     Cart cart;
 
     public User(Long id, String name, boolean isActive, String apiKey) {
-        this.name = name;
+        this.username = name;
         this.isActive = isActive;
         this.apiKey = apiKey;
     }
