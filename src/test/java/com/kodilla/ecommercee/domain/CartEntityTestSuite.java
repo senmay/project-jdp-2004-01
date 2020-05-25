@@ -131,7 +131,7 @@ public class CartEntityTestSuite {
         long id = cart.getId();
 
         //Then
-        Assert.assertEquals("userName", cart.getUser().getName());
+        Assert.assertEquals("userName", cart.getUser().getUsername());
 
         //CleanUp
         cartRepository.deleteById(id);
@@ -151,7 +151,7 @@ public class CartEntityTestSuite {
         cartRepository.save(cart);
         userRepository.save(user);
         long id = cart.getId();
-        userRepository.deleteById(users.get(0).getId());
+        userRepository.deleteById(users.get(0).getUserId());
 
         //Then
         Assert.assertEquals(0, userRepository.findAll().size());

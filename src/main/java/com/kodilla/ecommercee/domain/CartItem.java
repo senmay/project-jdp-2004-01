@@ -38,9 +38,9 @@ public class CartItem {
     //  @JoinColumn
             Cart cart = new Cart();
 
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn
     private Product product;
 
+}
 }

@@ -72,7 +72,7 @@ public class UserTestSuite {
         User user = new User();
         //When
         userRepository.save(user);
-        Long userId = user.getId();
+        Long userId = user.getUserId();
         //Then
         assertNotEquals(0, (long) userId);
     }
@@ -82,7 +82,7 @@ public class UserTestSuite {
         //Given
         userRepository.save(user1);
         userRepository.save(user2);
-        Long userIdToFind = user1.getId();
+        Long userIdToFind = user1.getUserId();
         //When
         Optional<User> userOptional = userRepository.findById(userIdToFind);
         //Then
@@ -95,8 +95,8 @@ public class UserTestSuite {
         //Given
         userRepository.save(user1);
         userRepository.save(user2);
-        Long userIdNeedToFind = user2.getId();
-        Long userIdToDelete= user1.getId();
+        Long userIdNeedToFind = user2.getUserId();
+        Long userIdToDelete= user1.getUserId();
         //When
         userRepository.deleteById(userIdToDelete);
         List<User> users = userRepository.findAll();
@@ -147,7 +147,7 @@ public class UserTestSuite {
         userRepository.save(user1);
 
         //When
-        userRepository.deleteById(user1.getId());
+        userRepository.deleteById(user1.getUserId());
         List<User> user = userRepository.findAll();
         List<Order> orders = orderRepository.findAll();
 
@@ -163,7 +163,7 @@ public class UserTestSuite {
         groupRepository.save(group);
 
         //When
-        userRepository.deleteById(user1.getId());
+        userRepository.deleteById(user1.getUserId());
         List<Group> groups = groupRepository.findAll();
 
         //Then
@@ -181,7 +181,7 @@ public class UserTestSuite {
         userRepository.save(user1);
 
         //When
-        userRepository.deleteById(user1.getId());
+        userRepository.deleteById(user1.getUserId());
         List<Cart> carts = cartRepository.findAll();
 
         //Then

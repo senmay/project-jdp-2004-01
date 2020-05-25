@@ -26,7 +26,7 @@ public class Cart {
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-   // @JoinColumn
+    @JoinColumn
     private User user;
 
     @OneToMany(
@@ -35,7 +35,7 @@ public class Cart {
             cascade = CascadeType.PERSIST,
             fetch = FetchType.EAGER
     )
-    List<CartItem> cartItemList=new ArrayList<>();
+    List<CartItem> cartItemList;
 
     public Cart(@NotNull String name) {
         this.name = name;
