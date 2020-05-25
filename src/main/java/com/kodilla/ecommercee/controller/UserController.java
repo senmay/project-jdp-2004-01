@@ -1,25 +1,50 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.domain.UserNotFoundException;
 import com.kodilla.ecommercee.domain.dto.UserDto;
+import com.kodilla.ecommercee.mapper.UserMapper;
+import com.kodilla.ecommercee.service.DbUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/v1/user")
 public class UserController {
+    @Autowired
+    DbUserService dbUserService;
+    @Autowired
+    UserMapper userMapper;
 
-    @RequestMapping(method = RequestMethod.POST, value = "createUser", consumes = APPLICATION_JSON_VALUE)
+    @PostMapping(value = "createUser", consumes = APPLICATION_JSON_VALUE)
     public void createUser(@RequestBody UserDto userDto) {
+        dbUserService.saveUser(userMapper.mapToUser(userDto));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "banUser")
-    public UserDto banUser(@RequestParam Long userId) {
-        return new UserDto(1L, "BannedUser", false, null);
+    @GetMapping(value = "getUsers")
+    public List<UserDto> getUsers() {
+        return userMapper.mapToUserDtoList(dbUserService.getAllUsers());
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "keyGenerator" )
-    public UserDto apiKeyGenerator(@RequestBody UserDto userDto) {
-        return new UserDto(2L, "KeyAddedToUser", true, "123asd");
+    @GetMapping(value = "getUser")
+    public UserDto getUser(@RequestParam Long userId) throws UserNotFoundException {
+        return userMapper.mapToUserDto(dbUserService.getUser(userId).orElseThrow(UserNotFoundException::new));
+    }
+    @PutMapping(value = "banUser")
+    private void banUser(@RequestParam Long userId) throws UserNotFoundException {
+        dbUserService.banUser(userId);
+    }
+
+    @PutMapping(value = "keyGenerator")
+    private String apiKeyGenerator(@RequestParam Long userId) throws UserNotFoundException {
+       return dbUserService.generateApiKey(userId);
+    }
+
+    @DeleteMapping(value ="deleteUser")
+    public void deleteUser(@RequestParam Long userId) throws UserNotFoundException {
+        dbUserService.deleteUser(userId);
     }
 }
