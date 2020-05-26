@@ -35,7 +35,7 @@ public class CartItem {
     }
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    //  @JoinColumn
+    @JoinColumn
             Cart cart = new Cart();
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
