@@ -17,9 +17,8 @@ import java.util.List;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(unique = true)
-    @NotNull
+    @GeneratedValue
+    @Column
     private Long id;
 
     @Column

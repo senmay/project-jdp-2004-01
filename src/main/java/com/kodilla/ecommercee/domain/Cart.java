@@ -16,7 +16,6 @@ import java.util.List;
 @Setter
 @Entity(name = "carts")
 public class Cart {
-
     @Id
     @GeneratedValue
     @Column
@@ -33,8 +32,8 @@ public class Cart {
     @OneToMany(
             targetEntity = CartItem.class,
             mappedBy = "cart",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER
     )
     List<CartItem> cartItemList;
 
