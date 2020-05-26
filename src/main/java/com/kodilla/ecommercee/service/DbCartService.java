@@ -24,6 +24,7 @@ import java.util.Optional;
 public class DbCartService {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(DbCartService.class);
+    private static final String INFORMATION = "Product not found";
 
 
     @Autowired
@@ -68,7 +69,7 @@ public class DbCartService {
             }
             } else {
                 LOGGER.error("No product with ID: " + id + " found");
-                throw new ProductNotFoundException();
+                throw new ProductNotFoundException(INFORMATION);
             }
         }
 
@@ -90,7 +91,7 @@ public class DbCartService {
                     LOGGER.info("Successfully deleted CartItem-ID: " + cartItemId + " from Cart");
                 } else {
                     LOGGER.warn("Cart-ID: " + cart.getCartItemList() + "not contain Item: " + cartItem.getId());
-                    throw new ProductNotFoundException();
+                    throw new ProductNotFoundException(INFORMATION);
                 }
                 } else {
                     LOGGER.error("No cart with ID: " + cartId + " found");
