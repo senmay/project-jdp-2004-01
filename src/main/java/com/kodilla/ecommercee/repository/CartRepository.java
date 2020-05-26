@@ -20,8 +20,5 @@ public interface CartRepository extends CrudRepository<Cart, Long> {
     List<Cart> findAll();
 
     @Override
-    Cart save(Cart cart);
-
-    @Override
     void deleteById(Long cartId);
 }

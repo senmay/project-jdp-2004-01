@@ -40,4 +40,10 @@ public class Cart {
     public Cart(@NotNull String name) {
         this.name = name;
     }
+
+    public Cart(long id, User user, List<CartItem> cartItemList) {
+        this.id = id;
+        this.user = user;
+        this.cartItemList = cartItemList;
+    }
 }
